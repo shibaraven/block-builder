@@ -1,0 +1,123 @@
+{
+  "name": "block-builder-vscode",
+  "displayName": "Block Builder",
+  "description": "Visual TypeScript code generator \u2014 design APIs with drag & drop blocks",
+  "version": "1.0.0",
+  "publisher": "block-builder",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "typescript",
+    "api",
+    "code generator",
+    "visual",
+    "drag and drop"
+  ],
+  "activationEvents": [
+    "onCommand:block-builder.open",
+    "workspaceContains:canvas.json"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "block-builder.open",
+        "title": "Block Builder: Open Visual Editor"
+      },
+      {
+        "command": "block-builder.generate",
+        "title": "Block Builder: Generate Code from canvas.json"
+      },
+      {
+        "command": "block-builder.init",
+        "title": "Block Builder: Initialize canvas.json"
+      },
+      {
+        "command": "block-builder.preview",
+        "title": "Block Builder: Preview Generated Code"
+      },
+      {
+        "command": "block-builder.insertCode",
+        "title": "Block Builder: Insert Generated File"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "block-builder.generate",
+          "when": "resourceFilename == canvas.json",
+          "group": "block-builder"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Block Builder",
+      "properties": {
+        "blockBuilder.serverUrl": {
+          "type": "string",
+          "default": "http://localhost:3000",
+          "description": "Block Builder web app URL"
+        },
+        "blockBuilder.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:3001",
+          "description": "Block Builder API server URL"
+        },
+        "blockBuilder.outputDir": {
+          "type": "string",
+          "default": "./generated",
+          "description": "Default output directory for generated code"
+        },
+        "blockBuilder.autoGenerate": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-generate when canvas.json changes"
+        },
+        "blockBuilder.framework": {
+          "type": "string",
+          "default": "react",
+          "description": "Frontend framework (react, vue)"
+        },
+        "blockBuilder.apiFramework": {
+          "type": "string",
+          "default": "hono",
+          "description": "API framework (hono, nestjs, express, graphql, trpc)"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "block-builder.open",
+        "key": "ctrl+shift+b",
+        "mac": "cmd+shift+b"
+      },
+      {
+        "command": "block-builder.generate",
+        "key": "ctrl+shift+g",
+        "mac": "cmd+shift+g"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^2.24.0",
+    "typescript": "^5.4.0"
+  },
+  "preview": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/block-builder"
+  }
+}

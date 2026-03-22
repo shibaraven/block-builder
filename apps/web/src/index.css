@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── ReactFlow ────────────────────────────────────────────────────── */
+.react-flow__edge-path {
+  stroke: #378ADD;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 4;
+}
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #185FA5;
+  stroke-width: 2;
+}
+.react-flow__handle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border-width: 2px;
+}
+.react-flow__handle-right { right: -6px; }
+.react-flow__handle-left  { left:  -6px; }
+.react-flow__minimap {
+  border-radius: 8px;
+  border: 0.5px solid #e5e7eb;
+  overflow: hidden;
+}
+
+/* ── Block node ────────────────────────────────────────────────────── */
+.block-node {
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  transition: box-shadow 0.15s ease, transform 0.1s ease;
+}
+.block-node:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.block-node.selected { box-shadow: 0 0 0 2px #378ADD; }
+
+/* ── Animations ────────────────────────────────────────────────────── */
+@keyframes slide-in-right {
+  from { transform: translateX(8px); opacity: 0; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+.animate-slide-in { animation: slide-in-right 0.18s ease-out forwards; }
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in { animation: fade-in 0.2s ease-out forwards; }
+
+/* ── Scrollbars ────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+/* ── Monaco editor ─────────────────────────────────────────────────── */
+.monaco-container { border-radius: 0 0 8px 8px; overflow: hidden; }
+
+/* ── Dark mode ─────────────────────────────────────────────────────── */
+.dark ::-webkit-scrollbar-thumb { background: #4b5563; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
+.dark .react-flow__minimap { border-color: #374151 !important; }
+.dark .block-node { box-shadow: 0 1px 4px rgba(0,0,0,0.4) !important; }
+.dark .react-flow__controls { background: #1f2937 !important; border-color: #374151 !important; }
+.dark .react-flow__controls button { background: #1f2937 !important; color: #9ca3af !important; border-color: #374151 !important; }
+.dark .react-flow__controls button:hover { background: #374151 !important; }
+
+/* Tailwind dark variants */
+.dark .bg-white { background-color: #1f2937 !important; }
+.dark .bg-gray-50 { background-color: #111827 !important; }
+.dark .bg-gray-100 { background-color: #1f2937 !important; }
+.dark .bg-gray-200 { background-color: #374151 !important; }
+.dark .border-gray-200 { border-color: #374151 !important; }
+.dark .border-gray-100 { border-color: #1f2937 !important; }
+.dark .text-gray-900 { color: #f9fafb !important; }
+.dark .text-gray-800 { color: #f3f4f6 !important; }
+.dark .text-gray-700 { color: #d1d5db !important; }
+.dark .text-gray-600 { color: #9ca3af !important; }
+.dark .text-gray-500 { color: #6b7280 !important; }
+.dark .text-gray-400 { color: #9ca3af !important; }
+.dark .text-gray-300 { color: #6b7280 !important; }
+
+/* ── Responsive ────────────────────────────────────────────────────── */
+
+/* Prevent text overflow in narrow panels */
+.block-node { min-width: 140px; max-width: 220px; }
+
+/* Sidebar responsive */
+@media (max-width: 1024px) {
+  .block-node { min-width: 130px; max-width: 200px; }
+}
+
+/* Mobile canvas touch improvements */
+@media (max-width: 640px) {
+  .react-flow__controls { bottom: 60px !important; }
+  .react-flow__minimap  { display: none; }
+  .block-node { min-width: 120px; font-size: 11px; }
+}
+
+/* Toolbar responsive hiding */
+@media (max-width: 640px) {
+  .toolbar-label { display: none; }
+}
+
+/* Modal responsive */
+@media (max-width: 640px) {
+  .modal-wide { width: calc(100vw - 16px) !important; max-height: 90vh !important; }
+}
+
+/* Output panel min width protection */
+.output-panel { min-width: 240px; }
+
+/* Canvas: don't let suggestion panel overflow on small screens */
+@media (max-width: 768px) {
+  .suggestion-panel { left: 8px !important; right: 8px !important; width: auto !important; }
+}
+
+/* Touch targets on mobile */
+@media (hover: none) {
+  button { min-height: 36px; }
+  .block-node .trash-btn { opacity: 1 !important; }
+}
+
+/* High-DPI / 4K screens */
+@media (min-width: 2560px) {
+  .block-node { min-width: 180px; max-width: 260px; font-size: 14px; }
+  .react-flow__node { font-size: 14px; }
+}
+
+/* Landscape mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .react-flow__controls { bottom: 4px !important; left: 4px !important; }
+}
+
+/* Focus visible for keyboard nav */
+button:focus-visible, input:focus-visible {
+  outline: 2px solid #378ADD;
+  outline-offset: 2px;
+}
+
+/* ── Edge flow animation ───────────────────────────────────────────── */
+@keyframes flowDot {
+  0%   { stroke-dashoffset: 24; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.react-flow__edge-path {
+  stroke-dasharray: 6 4;
+  animation: flowDot 1.2s linear infinite;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #185FA5;
+  stroke-width: 2.5;
+  animation: flowDot 0.7s linear infinite;
+}
+
+/* New edge drawing animation */
+@keyframes drawEdge {
+  from { stroke-dashoffset: 200; opacity: 0; }
+  to   { stroke-dashoffset: 0;   opacity: 0.7; }
+}
+
+.react-flow__edge-path {
+  animation: drawEdge 0.3s ease-out forwards, flowDot 1.2s linear 0.3s infinite;
+}
+
+/* Invalid edge - red pulse */
+.react-flow__edge[data-invalid="true"] .react-flow__edge-path {
+  stroke: #E24B4A;
+  animation: flowDot 0.5s linear infinite;
+}

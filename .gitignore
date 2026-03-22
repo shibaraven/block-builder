@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+dist-electron/
+.next/
+out/
+build/
+
+# Turbo cache
+.turbo/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Database
+apps/server/data/
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+logs/
+
+# IDE
+.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Electron build cache
+apps/desktop/assets/icon.ico
+apps/desktop/assets/icon.png
+apps/desktop/assets/icon-512.png
+apps/desktop/assets/apple-touch-icon.png
+
+# Test coverage
+coverage/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Vite
+apps/web/dist/
+apps/web/.vite/
+
+# pnpm
+.npmrc.local
